@@ -1,12 +1,14 @@
 Slurp Developer Assignment
 
+Link to the code in a JS Bin page: http://jsbin.com/qiyakar/edit?js,console
+
 # Data Representations
 ## Bag
 The Bag class is mainly used as a container for bag dimension information.
 The constants `smallBags`, `medBags`, and `largeBags` are arrays storing the 6 possible orientations (different configurations of x,y,z dimensions) for each bag, and those arrays are used for trying various rotations of the bag when placing it in a box.
 
 ## Box
-The Box class stores information about how full a box is, and provides a method to add a bag to the box.
+The Box class stores information about the size and remaining capacity of a box, and provides a method to add a bag to the box.
 
 The most important field in a Box object is the `heights` array. This 2d array of integers has the same dimension as the box (ex. a 40cm box has a 40 x 40 `heights` array). Each value in the array represents a 1cm x 1cm area in the box, and it stores the height of bag(s) currently stacked in that location. I refer to the inner arrays as 'rows', and I consider the 'row' index of a location the 'x' dimension of that location. An index in the outer array is the 'column' index, or 'y' dimension. The height values in the array represent the 'z' dimension.
 
