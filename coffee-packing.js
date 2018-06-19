@@ -238,5 +238,3 @@ const actualVolume = boxes[0].bags.reduce((acc, bag) => (acc + bag.getVolume()),
 console.log("actual volume: " + actualVolume);
 console.log(boxes[0].bags);
 printArray(boxes[0].heights, boxes[0].dimension);
-console.log(boxes[1].bags);
-printArray(boxes[1].heights, boxes[1].dimension);
