@@ -20,9 +20,10 @@ For each bag, my algorithm runs over an array of boxes, trying to place the bag 
 
 When placing a bag in a box, the function checks each location in the box to see if the bag would fit there in any possible orientation. If so, it places it there, and moves on to the next bag. One caveat is that bags cannot be placed in empty space underneath other bags, because that empty space is not kept track of. Once a bag is placed in an area, that whole area is considered filled to the height of the placed bag.
 
-Finally, I carefully considered the order of bag placements and initial orientations when developing this program. This proved to be important.
-Since my algorithm fills boxes with bags in the 'z' direction  first, by stacking as many as will fit at (0,0) in the array before moving on, I made sure that the first bag orientation that would be checked was the one with their shortest dimension (2cm, 2cm, and 10cm) in the z direction. This ensured that a maximum number of bags would be stacked in the same orientation in order to not waste space.
-An informal set of tests with various numbers of bags and box sizes seemed to show a dramatic reduction in wasted space as a result of this orientation setup (previously, the largest dimension was in the z direction, which wasted more space since fewer bags could be stacked in that orientation and the upper ones had to be rotated).
+Finally, I carefully considered how to set up the order of bag placements and initial orientations when developing this program. This proved to be important.
+Since my algorithm fills boxes with bags in the 'z' direction first, by vertically stacking as many as will fit at (0,0) in the array before moving on, I made sure that the bags were initially oriented with their shortest dimension in the 'z' direction. This ensured that the maximum number of bags could be stacked evenly on top of each other before trying to rotate a bag or trying a new location. I also packed the 1000g bags before the other sizes, since the others were much thinner and more likely to be able to fit into spaces that the 1000g bags couldn't use.
+
+An informal set of tests with different numbers of bags and box sizes seemed to show a dramatic reduction in wasted space as a result of this orientation setup. By comparison, when the largest dimension was in the z direction, fewer bags could be stacked vertically in that orientation, causing the upper ones to be rotated before placement.
 
 
 ## Simplification 1
