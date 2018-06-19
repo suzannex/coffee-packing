@@ -159,7 +159,7 @@ const largeBags = Bag.allBags(26, 14, 10);
 function main(small, med, large, boxDimension) {
   let errorMsg = validateArgs(small, med, large, boxDimension);
   if (errorMsg !== false) {
-    return "invalid input: " + errorMsg;
+    return "Invalid input: " + errorMsg;
   } else {
     return packBoxes(small, med, large, boxDimension).length;
   }
@@ -169,7 +169,7 @@ function main(small, med, large, boxDimension) {
 // determine # of boxes needed to hold all bags
 // int, int, int, int => array of Box
 function packBoxes(small, med, large, boxDimension) {
-  var boxes = [new Box(boxDimension)]
+  var boxes = []
   // add the large bags
   for (var i = 0; i < large; i++) {
     boxes = addBagToBoxes(largeBags, boxes, boxDimension)
@@ -205,36 +205,27 @@ function addBagToBoxes(bags, boxes, boxDimension) {
 // Validate program arguments + argument types
 function validateArgs(small, med, large, boxDimension) {
   let errorMsg = false;
-  if (small < 0) {
-    errorMsg = "# of 200g bags is less than 0: " + small;
+  if (!Number.isInteger(parseInt(small))) {
+    errorMsg = "non-integer argument: " + small + " ("  + typeof small + ")";
+  } else if (!Number.isInteger(parseInt(med))) {
+    errorMsg = "non-integer argument: " + med + " ("  + typeof med + ")";
+  } else if (!Number.isInteger(parseInt(large))) {
+    errorMsg = "non-integer argument: " + large + " ("  + typeof large + ")";
+  } else if (!Number.isInteger(parseInt(boxDimension))) {
+    errorMsg = "non-integer argument: " + boxDimension + " ("  + typeof boxDimension + ")";
+  } else if (small < 0) {
+    errorMsg = "number of 200g bags is less than 0: " + small;
   } else if (med < 0) {
-    errorMsg = "# of 400g bags is less than 0: " + med;
+    errorMsg = "number of 400g bags is less than 0: " + med;
   } else if (large < 0) {
-    errorMsg = "# of 1000g bags is less than 0: " + large;
+    errorMsg = "number of 1000g bags is less than 0: " + large;
   } else if (!(boxDimension >= 30 && boxDimension <= 100)) {
     errorMsg = "box dimension is not between 30 and 100 cm: " + boxDimension;
-  } else if (!Number.isInteger(small)) {
-    errorMsg = "non-integer argument: " + small;
-  } else if (!Number.isInteger(med)) {
-    errorMsg = "non-integer argument: " + med;
-  } else if (!Number.isInteger(large)) {
-    errorMsg = "non-integer argument: " + large;
-  } else if (!Number.isInteger(boxDimension)) {
-    errorMsg = "non-integer argument: " + boxDimension;
   }
   return errorMsg;
 }
 
-
-// read in args
-// set values: size of box, # of each size bag
-// program var: array of boxes, init to 1 box w/ right dimensions.
-
+// Used for running the program from the command line
 var args = process.argv;
-var boxes = packBoxes(args[2], args[3], args[4], args[5]);
-var numBoxes = boxes.length;
-console.log(numBoxes);
-const actualVolume = boxes[0].bags.reduce((acc, bag) => (acc + bag.getVolume()), 0);
-console.log("actual volume: " + actualVolume);
-console.log(boxes[0].bags);
-printArray(boxes[0].heights, boxes[0].dimension);
+var result = main(args[2], args[3], args[4], args[5]);
+console.log(result);
