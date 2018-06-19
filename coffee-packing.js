@@ -70,13 +70,11 @@ class Bag {
 class Box {
   /* Instance variables:
     dimension : the side length of this Box in centimeters
-    bags : a list of all the Bags that have been added to this Box
     heights : a 2D array of integers representing a top view of the bags
        in this Box, with each value representing the total height of
        stacked Bags at that 1cm by 1cm location.   */
   constructor(dimension) {
     this.dimension = dimension;
-    this.bags = [];
     this.heights = generateZeroHeightArray(dimension);
   }
 
@@ -92,12 +90,7 @@ class Box {
         // try adding the bag at different orientations until it fits
         for (let bag of bags) {
           if (this.doesBagFit(bag, row, col, height)) {
-            // prnt this.heights to see if it changed
-            console.log("occ vol before adding bag: " + this.getOccupiedVolume());
-            this.updateHeights(row + bag.getX(), col + bag.getY(), height + bag.getZ())
-            console.log("occ vol after adding bag: " + this.getOccupiedVolume());
-
-            this.bags = this.bags.concat(bag);
+            this.updateHeights(row + bag.getX(), col + bag.getY(), height + bag.getZ());
             return true;
           }
         }
@@ -108,7 +101,7 @@ class Box {
 
   // Does the bag fit in this box if placed at the given x,y,z location?
   // @bag -- a Bag
-  // @x, @y, @z -- coordinates in the box (in centimenters)
+  // @x, @y, @z -- location coordinates in the box (in centimenters)
   doesBagFit(bag, x, y, z) {
     let xFits = (x + bag.getX()) <= this.dimension;
     let yFits = (y + bag.getY()) <= this.dimension;
@@ -118,13 +111,11 @@ class Box {
 
   // From 0,0 to x,y, set all heights in the array to at least
   // as tall as height.
-  // @x, @y -- coordinates in the box (in cm)
+  // @x, @y -- location coordinates in the box (in cm)
   // @height -- the new height
   updateHeights(x, y, height) {
     for (let i = 0; i < x; i++) {
       for (let j = 0; j < y; j++) {
-        //console.log(i + " " + j);
-        //console.log(this.heights[i][j]);
         this.heights[i][j] = Math.max(height, this.heights[i][j]);
       }
     }
@@ -140,9 +131,9 @@ class Box {
     const innerReducer = (totalVol, cell) => ( cell + totalVol )
     return this.heights.reduce(outerReducer,0);
   }
-
-
 }
+
+
 
 // ----------------------------------------------------------------------------
 // MAIN FUNCTIONS
@@ -225,7 +216,7 @@ function validateArgs(small, med, large, boxDimension) {
   return errorMsg;
 }
 
-// Used for running the program from the command line
+// Code for running the program from the command line
 var args = process.argv;
 var result = main(args[2], args[3], args[4], args[5]);
 console.log(result);
