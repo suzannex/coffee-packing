@@ -217,6 +217,6 @@ function validateArgs(small, med, large, boxDimension) {
 }
 
 // Code for running the program from the command line
-var args = process.argv;
-var result = main(args[2], args[3], args[4], args[5]);
-console.log(result);
+// var args = process.argv;
+// var result = main(args[2], args[3], args[4], args[5]);
+// console.log(result);
