@@ -36,16 +36,16 @@ This is essentially the same idea as the prior simplification.
 ## \* Example of updating heights in the array after adding a bag.
 
 If a bag measuring 2x1x3 is added at (1,1) in the following array (where 0,0 is bottom left):
->    0 0 0
->    1 0 0
+>    0 0 0\n
+>    1 0 0\n
 >    1 2 2
 
 The array will then look like this:
->    0 0 0
->    3 3 3
+>    0 0 0\n
+>    3 3 3\n
 >    3 3 3
 
 instead of:
->    0 0 0
->    1 3 3
+>    0 0 0\n
+>    1 3 3\n
 >    1 2 2
