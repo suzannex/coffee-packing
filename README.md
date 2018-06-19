@@ -16,7 +16,7 @@ The most important field in a Box object is the `heights` array. This 2d array o
 #  Algorithm
 The approach I used was a greedy algorithm that simply placed each bag in the first location in the first box where it would fit. I know that in general, bin-packing problems are NP-complete, but that there exist good heuristics for approximating solutions, with a greedy approach being one of them.
 
-For each bag, my algorithm runs over an array of boxes, trying to place the bag in the first box that holds it, or creating a new box if the rest are too full.
+For each bag, my algorithm runs over an array of boxes, trying to place the bag in the first box that holds it, or creating a new box for it if the rest are too full.
 
 When placing a bag in a box, the function checks each location in the box to see if the bag would fit there in any possible orientation. If so, it places it there, and moves on to the next bag. One caveat is that bags cannot be placed in empty space underneath other bags, because that empty space is not kept track of. Once a bag is placed in an area, that whole area is considered filled to the height of the placed bag.
 
