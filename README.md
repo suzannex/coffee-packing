@@ -1,6 +1,6 @@
-Slurp Developer Assignment
+# Slurp Developer Assignment
 
-Link to the code in a JS Bin page: http://jsbin.com/qiyakar/edit?js,console
+[Link to the code in a JS Bin page] (http://jsbin.com/qiyakar/edit?js,console)
 
 # Data Representations
 ## Bag
