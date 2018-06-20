@@ -2,6 +2,8 @@
 
 [Link to the code in a Jdoodle page](http://jdoodle.com/a/xHR)
 
+If running the program from the command line, simply start it with `node coffee-packing.js`. The program will then prompt you to input 4 numbers: the quantities of small, medium, and large coffee bags, and the size of the box in centimeters. Then hit Enter to compute how many boxes are needed to hold all the bags. Enter `exit` to exit the program.
+
 # Data Representations
 ## Bag
 The Bag class is mainly used as a container for bag dimension information.

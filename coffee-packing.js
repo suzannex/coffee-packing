@@ -144,15 +144,23 @@ const smallBags = Bag.allBags(23, 16, 2);
 const medBags = Bag.allBags(26, 22, 2);
 const largeBags = Bag.allBags(26, 14, 10);
 
-// Use this function to run the program.
+// Main program function.
 // Validates inputs then runs the algorithm.
-// int, int, int, int => int
-function main(small, med, large, boxDimension) {
+function main(args) {
+  if (args.length != 4) {
+    return "invalid number of arguments: " + args.length;
+  }
+  let small = args[0];
+  let med = args[1];
+  let large = args[2];
+  let boxDimension = args[3];
+
   let errorMsg = validateArgs(small, med, large, boxDimension);
   if (errorMsg !== false) {
     return "Invalid input: " + errorMsg;
   } else {
-    return packBoxes(small, med, large, boxDimension).length;
+    return "Number of boxes: " +
+    packBoxes(small, med, large, boxDimension).length;
   }
 }
 
@@ -196,27 +204,52 @@ function addBagToBoxes(bags, boxes, boxDimension) {
 // Validate program arguments + argument types
 function validateArgs(small, med, large, boxDimension) {
   let errorMsg = false;
+
   if (!Number.isInteger(parseInt(small))) {
-    errorMsg = "non-integer argument: " + small + " ("  + typeof small + ")";
+    errorMsg = "non-integer argument: '" + small + "'";
   } else if (!Number.isInteger(parseInt(med))) {
-    errorMsg = "non-integer argument: " + med + " ("  + typeof med + ")";
+    errorMsg = "non-integer argument: '" + med + "'";
   } else if (!Number.isInteger(parseInt(large))) {
-    errorMsg = "non-integer argument: " + large + " ("  + typeof large + ")";
+    errorMsg = "non-integer argument: '" + large + "'";
   } else if (!Number.isInteger(parseInt(boxDimension))) {
-    errorMsg = "non-integer argument: " + boxDimension + " ("  + typeof boxDimension + ")";
-  } else if (small < 0) {
-    errorMsg = "number of 200g bags is less than 0: " + small;
+    errorMsg = "non-integer argument: '" + boxDimension + "'";
+  }
+  else if (small < 0) {
+    errorMsg = "number of 200g bags is less than 0: '" + small + "'";
   } else if (med < 0) {
-    errorMsg = "number of 400g bags is less than 0: " + med;
+    errorMsg = "number of 400g bags is less than 0: '" + med + "'";
   } else if (large < 0) {
-    errorMsg = "number of 1000g bags is less than 0: " + large;
+    errorMsg = "number of 1000g bags is less than 0: '" + large + "'";
   } else if (!(boxDimension >= 30 && boxDimension <= 100)) {
-    errorMsg = "box dimension is not between 30 and 100 cm: " + boxDimension;
+    errorMsg = "box dimension is not between 30 and 100 cm: '" + boxDimension + "'";
   }
   return errorMsg;
 }
 
-// Code for running the program from the command line
-var args = process.argv;
-var result = main(args[2], args[3], args[4], args[5]);
-console.log(result);
+
+// Code for running the program with Node from command line
+
+var readline = require('readline');
+var reader = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
+
+var prompt = "Enter the quantities of small, medium, and large bags, and the dimension of the box, each separated by a single space:";
+console.log(prompt);
+reader.on('line', (line) => {
+  var args = line.split(" ");
+  if (args.length > 0 && args[0] == 'exit') {
+    process.stdin.pause();
+    return;
+  }
+  console.log(main(args) + "\n");
+  console.log(prompt);
+});
+
+
+// Code for running the program on JDoodle
+// var args = process.argv;
+// var result = main(args[2], args[3], args[4], args[5]);
+// console.log(result);
