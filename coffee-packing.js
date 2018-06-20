@@ -12,9 +12,9 @@ This file contains the following sections:
 
 // Make a 2d array with dim rows and columns, with all values init to 0
 function generateZeroHeightArray(dim) {
-  var arr = new Array(dim);
+  let arr = new Array(dim);
   for (let i = 0; i < dim; i++) {
-    row = new Array(dim);
+    let row = new Array(dim);
     for (let j = 0; j < dim; j++) { row[j] = 0; }
     arr[i] = row;
   }
@@ -160,17 +160,17 @@ function main(small, med, large, boxDimension) {
 // determine # of boxes needed to hold all bags
 // int, int, int, int => array of Box
 function packBoxes(small, med, large, boxDimension) {
-  var boxes = []
+  let boxes = []
   // add the large bags
-  for (var i = 0; i < large; i++) {
+  for (let i = 0; i < large; i++) {
     boxes = addBagToBoxes(largeBags, boxes, boxDimension)
   }
   // add the medium bags
-  for (var i = 0; i < med; i++) {
+  for (let i = 0; i < med; i++) {
     boxes = addBagToBoxes(medBags, boxes, boxDimension)
   }
   // add the small bags
-  for (var i = 0; i < small; i++) {
+  for (let i = 0; i < small; i++) {
     boxes = addBagToBoxes(smallBags, boxes, boxDimension)
   }
   return boxes;
@@ -187,7 +187,7 @@ function addBagToBoxes(bags, boxes, boxDimension) {
     }
   }
   // add new box for the bag if it didn't fit in any existing box
-  var anotherBox = new Box(boxDimension);
+  let anotherBox = new Box(boxDimension);
   anotherBox.addBag(bags);
   return boxes.concat(anotherBox);
 }
@@ -217,6 +217,6 @@ function validateArgs(small, med, large, boxDimension) {
 }
 
 // Code for running the program from the command line
-// var args = process.argv;
-// var result = main(args[2], args[3], args[4], args[5]);
-// console.log(result);
+var args = process.argv;
+var result = main(args[2], args[3], args[4], args[5]);
+console.log(result);
